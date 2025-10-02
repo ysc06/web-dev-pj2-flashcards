@@ -46,13 +46,13 @@ https://imgur.com/a/KvdlOXh
 
 ## Diagram in words
 App (controller)
- ├─ stores all cards
- ├─ stores currentCardIndex
- ├─ shows title/description/total count
- └─ renders <Flashcard card={cards[currentCardIndex]} />
+- ├─ stores all cards
+- ├─ stores currentCardIndex
+- ├─ shows title/description/total count
+- └─ renders <Flashcard card={cards[currentCardIndex]} />
 
 Flashcard (view) 
- ├─ gets card prop
- ├─ stores isFront
- └─ onClick → flip between card.question and card.answer
+- ├─ gets card prop
+- ├─ stores isFront
+- └─ onClick → flip between card.question and card.answer
 
