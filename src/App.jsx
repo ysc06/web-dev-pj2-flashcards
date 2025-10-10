@@ -50,7 +50,30 @@ function App() {
   const [id, setID] = useState(0) 
   const handleNext = () => {
     if (id + 1 < cards.length) {
-      setID(id + 1);
+      setID(id + 1)
+      setGuess("")
+      setResult("idle")
+    }
+  };
+  const handleBack =() => {
+    if (id > 0) {
+      setID(id-1)
+      setGuess("")
+      setResult("")
+    }
+  };
+
+  /* live text from user */
+  const [guess, setGuess] = useState("")
+  const [result, setResult] = useState("idle")
+
+  const handleSubmit = () => {
+    const userGuess = guess.trim().toLowerCase()
+    const correctAnswer = cards[id].answer.toLowerCase().trim();
+    if (userGuess === correctAnswer) {
+      setResult("Correct!");
+    } else {
+      setResult("Wrong!")
     }
   };
 
@@ -60,9 +83,21 @@ return (
       <p> This deck is designed to help review and reinforce basic knowledge about generative AI. </p>
       <p> Total count: {cards.length} </p>
       <Flashcard card = {cards[id]}></Flashcard> 
-      <button onClick = {handleNext} disabled = {id === cards.length - 1} >
-        Next
-      </button>
+      <div className = "nav-buttons"> 
+         <button onClick ={handleBack} disabled = {id === 0}> Back </button>
+         <button onClick = {handleNext} disabled = {id === cards.length - 1} >Next</button>
+      </div>
+     <div className= "submit-button">
+        <input 
+          type = "text"
+          value = {guess}
+          onChange = {(e) => setGuess(e.target.value)}
+        />
+      </div>
+      <button onClick = {handleSubmit}> Submit </button>
+      {/* Feedback */}
+      {result === "Correct!" && <p style={{color: "green"}}>Correct!</p>}
+      {result === "Wrong!" && <p style={{color: "red"}}>Try again.</p>}
     </div>
   )
  
